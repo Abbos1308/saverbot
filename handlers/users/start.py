@@ -109,10 +109,12 @@ async def download_youtube_video(message, text):
 @dp.message_handler(content_types=types.ContentTypes.TEXT)
 async def handle_text(message: types.Message):
     text = message.text
-
+    matches = re.findall(youtube_regex, text)
+    
+    # Agar link topilsa True, aks holda False qaytarish
     if re.search(instagram_regex, text):
         await download_instagram_video(message, text)
     elif "tiktok.com" in text:
         await download_tiktok_video(message, text)
-    elif any(substring in text for substring in ["youtube"]):
+    elif bool(matches):
         await download_youtube_video(message, text)
