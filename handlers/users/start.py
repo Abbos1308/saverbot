@@ -93,12 +93,11 @@ async def download_youtube_video(message, text):
     with open(filename, 'wb') as f:
         f.write(response.content)
     file = types.InputFile(filename)
-    if 2<6:
+    try:
         print("hello")
         await bot.send_video(chat_id=message.chat.id, video=file, caption="@full_downloaderr_bot orqali yuklab olindi!")
         
-    #except Exception as err:
-    else:
+    except Exception as err:
         print(err)
         await message.answer("<b>Kechirasiz, kontentni yuklashda xatolik yuz berdi, qaytadan urining 😔</b>")
     os.remove(f"{filename}")
