@@ -2,8 +2,7 @@ import requests
 import json
 
 async def instadownloader(link):
-    url = "https://instagramapi.up.railway.app/instagram?link=https://www.instagram.com/reel/C50t2rWsaL-/?igsh=YzljYTk1ODg3Zg=="
-
+    url = "https://instagramapi.up.railway.app/instagram"
     querystring = {"link": link}
 
     
