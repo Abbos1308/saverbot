@@ -1,4 +1,6 @@
 from time import sleep
+from handlers.users.music_search_name import recieve_text
+import handlers
 import requests
 from aiogram import types
 from aiogram.dispatcher import FSMContext
@@ -52,7 +54,10 @@ async def bot_start(message: types.Message):
 
 instagram_regex = r'(https?:\/\/(?:www\.)?instagram\.com\/[-a-zA-Z0-9@:%._+~#=]*)'
 tiktok_regex = r'(https?:\/\/(?:www\.)?tiktok\.com\/@[-a-zA-Z0-9_]+\/video\/\d+)'
-youtube_regex = r'(https?:\/\/(?:www\.)?youtube\.com\/watch\?v=[a-zA-Z0-9_-]+)'
+youtube_regex = (
+        r'(https?://)?(www\.)?'
+        '(youtube|youtu|youtube-nocookie)\.(com|be)/'
+        '(watch\?v=|embed/|v/|.+\?v=)?([^&=%\?]{11})')
     
 
 async def download_instagram_video(message, text):
@@ -72,11 +77,10 @@ async def download_instagram_video(message, text):
 async def download_tiktok_video(message, text):
     msg_del = await bot.send_chat_action(message.chat.id, types.ChatActions.TYPING)
 
-    res = snaptik(text)
-    video = res[0].download(f"{message.message_id}.mp4")
-    input_file = types.InputFile(f"{message.message_id}.mp4")
-    await bot.send_video(message.chat.id, video=input_file, caption="@full_downloaderr_bot orqali yuklab olindi!")
-    os.remove(f"{message.message_id}.mp4")
+    #res = await tt(text)
+    
+    #await bot.send_video(message.chat.id, res, caption="@full_downloaderr_bot orqali yuklab olindi!")
+    await message.answer("Men hozirda bu manzildan media yuklay olmayman.")
 
 async def download_youtube_video(message, text):
     msg_del = await bot.send_chat_action(message.chat.id, types.ChatActions.TYPING)
@@ -93,12 +97,10 @@ async def download_youtube_video(message, text):
     with open(filename, 'wb') as f:
         f.write(response.content)
     file = types.InputFile(filename)
-    if 2<6:
-        print("hello")
+    try:
         await bot.send_video(chat_id=message.chat.id, video=file, caption="@full_downloaderr_bot orqali yuklab olindi!")
         
-    #except Exception as err:
-    else:
+    except Exception as err:
         print(err)
         await message.answer("<b>Kechirasiz, kontentni yuklashda xatolik yuz berdi, qaytadan urining 😔</b>")
     os.remove(f"{filename}")
@@ -106,10 +108,11 @@ async def download_youtube_video(message, text):
 @dp.message_handler(content_types=types.ContentTypes.TEXT)
 async def handle_text(message: types.Message):
     text = message.text
-
     if re.search(instagram_regex, text):
         await download_instagram_video(message, text)
     elif "tiktok.com" in text:
         await download_tiktok_video(message, text)
-    elif any(substring in text for substring in ["youtube"]):
+    elif re.search(youtube_regex,text):
         await download_youtube_video(message, text)
+    else :
+        await recieve_text(message)
