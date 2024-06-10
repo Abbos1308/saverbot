@@ -120,4 +120,4 @@ async def handle_text(message: types.Message):
     elif bool(matches):
         await download_youtube_video(message, text)
     else:
-        await recieve_text(text)
+        await recieve_text(message)
