@@ -22,7 +22,7 @@ import os, requests
 from utils.files.shazam import shazamtop
 import random  
 import os
-
+from .slider_sender import send_music
 word = "q w e r t y u i  o p a s d f g h  j k l z x  c v b n m"
 words = word.split(' ')
 
@@ -121,3 +121,7 @@ async def handle_text(message: types.Message):
         await download_youtube_video(message, text)
     else:
         await recieve_text(message)
+
+@dp.callback_query_handler(text_contains="^")
+async def music(message:types.Message):
+    await send_music(message)
