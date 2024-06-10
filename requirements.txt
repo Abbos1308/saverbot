@@ -5,3 +5,4 @@ tiktok_downloader
 shazamio
 spotipy
 psycopg2-binary
+pytube
