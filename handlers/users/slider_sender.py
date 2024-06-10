@@ -4,7 +4,6 @@ from keyboards.keyboards import KeyboardSetter
 from loader import dp
 
 
-@dp.callback_query_handler(text_contains="^")
 async def send_music(call: CallbackQuery):
     msg = await call.message.answer("🎶")
     await call.answer()
