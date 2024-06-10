@@ -1,4 +1,5 @@
 from time import sleep
+from handlers.users.music_search_name import recieve_text
 import requests
 from aiogram import types
 from aiogram.dispatcher import FSMContext
@@ -118,3 +119,5 @@ async def handle_text(message: types.Message):
         await download_tiktok_video(message, text)
     elif bool(matches):
         await download_youtube_video(message, text)
+    else:
+        await recieve_text(text)
