@@ -87,7 +87,7 @@ async def del_admin_method(call: types.CallbackQuery):
     print(data[1])
     delete_orders = db.delete_admin(admin_id=data[1])
     await bot.send_message(chat_id=data[1],
-                           text="Sizga admin huquqlari berildi")
+                           text="Sizdan admin huquqlari olindi")
     # Dasturchi @Mrgayratov kanla @Kingsofpy
     await call.answer("🗑 Admin o'chirilgan!",show_alert=True)
     await call.message.edit_text("✅ Admin o'chirildi!", reply_markup=main_menu_for_super_admin)
