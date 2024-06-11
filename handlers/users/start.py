@@ -43,7 +43,7 @@ async def bot_start_super_admin(message: types.Message):
 async def bot_start(message: types.Message):
     user = message.from_user
     if 2<5:
-        db.add_user(user_id=user.id,name=user.first_name,active=True)
+        db.add_user(user_id=user.id,name=user.first_name,active=1)
     else:
         pass
     user_id = message.from_user.first_name
