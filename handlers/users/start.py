@@ -42,9 +42,9 @@ async def bot_start_super_admin(message: types.Message):
 @dp.message_handler(commands=['start'], state="*")
 async def bot_start(message: types.Message):
     user = message.from_user
-    try:
+    if 2<5:
         db.add_user(user_id=user.id,name=user.first_name,active=True)
-    except:
+    else:
         pass
     user_id = message.from_user.first_name
     await message.answer("🤖Bu bot orqali quyidagilarni yuklab olishingiz mumkin: \n• Instagram - (stories/post/reels) \n• TikTok - (video/photo) [ Tez kunda ]\n• YouTube - (video)\n\n😉Maksimal yuklash hajmi - 400mb\n🤖 @full_downloaderr_bot")
