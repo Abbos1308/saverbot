@@ -68,8 +68,8 @@ async def show_admins(call: types.CallbackQuery):
 async def del_admin_method(call: types.CallbackQuery):
     await call.answer(cache_time=1)
     data = call.data.rsplit(":")
-    admin = db.select_all_admins(user_id=data[1])
-    for data in admin:
+    admins = db.select_all_admins()
+    for data in admins:
         text = f"Axborotlar\n\n"
         text += f"<i>👤 Ism:</i> <b>{data[2]}\n</b>"
         text += f"<i>🆔 ID:</i> <b>{data[1]}</b>"
