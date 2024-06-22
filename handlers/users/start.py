@@ -8,6 +8,7 @@ import logging,re
 from aiogram import types
 from aiogram.types import CallbackQuery
 from .insta import instadownloader
+from .facebook import fbdownloader
 from data.config import ADMINS
 from filters import IsUser, IsSuperAdmin, IsGuest
 from filters.admins import IsAdmin
@@ -76,7 +77,7 @@ async def download_instagram_video(message, text):
 
 async def download_facebook_video(message, text):
     msg_del = await bot.send_chat_action(message.chat.id, types.ChatActions.TYPING)
-    download_data = await instadownloader(text)
+    download_data = await fbdownloader(text)
 
     if download_data:
         try:
