@@ -11,7 +11,7 @@ async def instadownloader(link):
     rest = json.loads(response.text)
     #print("Result: ",rest)
 
-    result_dict = rest['data']['url']
+    result_dict = rest[0]['data']['url']
     return result_dict
     #if not rest['status']:
         #return result_dict
