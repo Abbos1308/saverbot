@@ -6,7 +6,7 @@ from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters.builtin import CommandStart
 import logging,re
 from aiogram import types
-from aiogram.types import CallbackQuery
+from aiogram.types import CallbackQuery , InputFile
 from .insta import instadownloader
 from .facebook import fbdownloader
 from data.config import ADMINS
@@ -70,7 +70,8 @@ async def download_instagram_video(message, text):
 
     if download_data:
         if 2<5:
-            await bot.send_document(message.chat.id, download_data, caption="@full_downloaderr_bot orqali yuklab olindi!")
+            video = InputFile.from_url(downloa_data)
+            await bot.send_document(message.chat.id, video, caption="@full_downloaderr_bot orqali yuklab olindi!")
         else:
         #except Exception as err:
             #print(err)
@@ -84,8 +85,9 @@ async def download_facebook_video(message, text):
 
     if download_data:
         try:
-            await bot.send_document(message.chat.id, download_data, caption="@full_downloaderr_bot orqali yuklab olindi!")
-            
+            video = InputFile.from_url(downloa_data)
+            await bot.send_document(message.chat.id, video, caption="@full_downloaderr_bot orqali yuklab olindi!")
+
         except Exception as err:
             print(err)
             await message.answer("<b>Kechirasiz, kontentni yuklashda xatolik yuz berdi, qaytadan urining 😔</b>")
