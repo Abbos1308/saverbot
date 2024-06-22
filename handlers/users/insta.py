@@ -11,10 +11,11 @@ async def instadownloader(link):
     rest = json.loads(response.text)
     #print("Result: ",rest)
 
-    result_dict = {}
-    if not rest['status']:
-        return result_dict
-    else:
-        result_dict['url'] = rest['data'][0]['url']
-        return result_dict
+    result_dict = rest['data']['url']
+    return result_dict
+    #if not rest['status']:
+        #return result_dict
+    #else:
+        #result_dict['url'] = rest['data'][0]['url']
+        #return result_dict
 
