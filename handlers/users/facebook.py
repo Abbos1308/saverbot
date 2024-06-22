@@ -11,7 +11,7 @@ async def fbdownloader(link):
     rest = json.loads(response.text)
     #print("Result: ",rest)
 
-    result_dict = rest[0]['data'][0]['url']
+    result_dict = rest['data'][0]['url']
     return result_dict
     #if not rest['status']:
         #return result_dict
