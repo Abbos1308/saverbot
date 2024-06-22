@@ -84,6 +84,7 @@ async def download_instagram_video(message, text):
             print(err)
             
             await message.answer("<b>Kechirasiz, kontentni yuklashda xatolik yuz berdi, qaytadan urining 😔</b>")
+    else:
         await message.answer("<b>Bu havolada kontent topilmadi 😔</b>")
     os.remove(f"{filename}")
 async def download_facebook_video(message, text):
