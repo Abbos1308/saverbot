@@ -70,8 +70,16 @@ async def download_instagram_video(message, text):
 
     if download_data:
         if 2<5:
-            video = InputFile.from_url(download_data)
-            await bot.send_document(message.chat.id, video, caption="@full_downloaderr_bot orqali yuklab olindi!")
+            sub = random.choice(words)
+            sub2 = random.choice(words)
+            filename = f"video_insta_{sub}_{sub2}.mp4"
+            response = requests.get(download_data)
+
+            with open(filename, 'wb') as f:
+                f.write(response.content)
+            file = types.InputFile(filename)
+            #video = InputFile.from_url(download_data)
+            await bot.send_document(message.chat.id, file, caption="@full_downloaderr_bot orqali yuklab olindi!")
         else:
         #except Exception as err:
             #print(err)
