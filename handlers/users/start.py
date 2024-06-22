@@ -70,7 +70,7 @@ async def download_instagram_video(message, text):
 
     if download_data:
         try:
-            await bot.send_document(message.chat.id, download_data['url'], caption="@full_downloaderr_bot orqali yuklab olindi!")
+            await bot.send_document(message.chat.id, download_data, caption="@full_downloaderr_bot orqali yuklab olindi!")
             
         except Exception as err:
             print(err)
@@ -84,7 +84,7 @@ async def download_facebook_video(message, text):
 
     if download_data:
         try:
-            await bot.send_document(message.chat.id, download_data['url'], caption="@full_downloaderr_bot orqali yuklab olindi!")
+            await bot.send_document(message.chat.id, download_data, caption="@full_downloaderr_bot orqali yuklab olindi!")
             
         except Exception as err:
             print(err)
