@@ -69,7 +69,7 @@ async def download_instagram_video(message, text):
     download_data = await instadownloader(text)
 
     if download_data:
-        if 2<5:
+        try:
             sub = random.choice(words)
             sub2 = random.choice(words)
             filename = f"video_insta_{sub}_{sub2}.mp4"
@@ -80,28 +80,35 @@ async def download_instagram_video(message, text):
             file = types.InputFile(filename)
             #video = InputFile.from_url(download_data)
             await bot.send_document(message.chat.id, file, caption="@full_downloaderr_bot orqali yuklab olindi!")
-        else:
-        #except Exception as err:
-            #print(err)
+        except Exception as err:
+            print(err)
+            
             await message.answer("<b>Kechirasiz, kontentni yuklashda xatolik yuz berdi, qaytadan urining 😔</b>")
-    else:
         await message.answer("<b>Bu havolada kontent topilmadi 😔</b>")
-
+    os.remove(f"{filename}")
 async def download_facebook_video(message, text):
     msg_del = await bot.send_chat_action(message.chat.id, types.ChatActions.TYPING)
     download_data = await fbdownloader(text)
 
     if download_data:
         try:
-            video = InputFile.from_url(download_data)
-            await bot.send_document(message.chat.id, video, caption="@full_downloaderr_bot orqali yuklab olindi!")
+            sub = random.choice(words)
+            sub2 = random.choice(words)
+            filename = f"video_fb_{sub}_{sub2}.mp4"
+            response = requests.get(download_data)
 
+            with open(filename, 'wb') as f:
+                f.write(response.content)
+            file = types.InputFile(filename)
+            #video = InputFile.from_url(download_data)
+            await bot.send_document(message.chat.id, file, caption="@full_downloaderr_bot orqali yuklab olindi!")
         except Exception as err:
             print(err)
+            
             await message.answer("<b>Kechirasiz, kontentni yuklashda xatolik yuz berdi, qaytadan urining 😔</b>")
     else:
         await message.answer("<b>Bu havolada kontent topilmadi 😔</b>")
-        
+    os.remove(f"{filename}")
 
 async def download_tiktok_video(message, text):
     msg_del = await bot.send_chat_action(message.chat.id, types.ChatActions.TYPING)
