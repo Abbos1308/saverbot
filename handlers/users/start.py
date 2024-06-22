@@ -60,6 +60,9 @@ youtube_regex = (
         '(youtube|youtu|youtube-nocookie)\.(com|be)/'
         '(watch\?v=|embed/|v/|.+\?v=)?([^&=%\?]{11})')
     
+facebook_regex = re.compile(
+    r'^(https?://)?(www\.)?facebook\.com/([A-Za-z0-9._-]+)(/)?'
+)
 
 async def download_instagram_video(message, text):
     msg_del = await bot.send_chat_action(message.chat.id, types.ChatActions.TYPING)
@@ -126,15 +129,17 @@ async def download_youtube_video(message, text):
 @dp.message_handler(content_types=types.ContentTypes.TEXT)
 async def handle_text(message: types.Message):
     text = message.text
-    matches = re.findall(youtube_regex, text)
-    
+    matches_yt = re.findall(youtube_regex, text)
+    matches_fb = re.findall(facebook_regex,text)
     # Agar link topilsa True, aks holda False qaytarish
     if re.search(instagram_regex, text):
         await download_instagram_video(message, text)
     elif "tiktok.com" in text:
         await download_tiktok_video(message, text)
-    elif bool(matches):
+    elif bool(matches_yt):
         await download_youtube_video(message, text)
+    elif bool(matches_fb):
+        await download_facebook_video(message,text)
     else:
         await recieve_text(message)
 
