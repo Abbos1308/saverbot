@@ -69,11 +69,11 @@ async def download_instagram_video(message, text):
     download_data = await instadownloader(text)
 
     if download_data:
-        try:
+        if 2<5:
             await bot.send_document(message.chat.id, download_data, caption="@full_downloaderr_bot orqali yuklab olindi!")
-            
-        except Exception as err:
-            print(err)
+        else:
+        #except Exception as err:
+            #print(err)
             await message.answer("<b>Kechirasiz, kontentni yuklashda xatolik yuz berdi, qaytadan urining 😔</b>")
     else:
         await message.answer("<b>Bu havolada kontent topilmadi 😔</b>")
