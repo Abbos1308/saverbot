@@ -49,8 +49,9 @@ async def bot_start(message: types.Message):
     except:
         pass
     user_id = message.from_user.first_name
-    await message.answer("🤖Bu bot orqali quyidagilarni yuklab olishingiz mumkin: \n• Instagram - (stories/post/reels) \n• TikTok - (video/photo) \n• YouTube - (video)\n• Facebook - (video)\n\n😉Maksimal yuklash hajmi - 400mb\n🤖 @full_downloaderr_bot")
-
+    await message.answer("salom")
+    #await message.answer("🤖Bu bot orqali quyidagilarni yuklab olishingiz mumkin: \n• Instagram - (stories/post/reels) \n• TikTok - (video/photo) \n• YouTube - (video)\n• Facebook - (video)\n\n😉Maksimal yuklash hajmi - 400mb\n🤖 @full_downloaderr_bot")
+    
     #await message.answer(f"Assalomu alaykum{user_id}\n\n </b>Media yuklashim uchun havolani yuboring")
 
 instagram_regex = r'(https?:\/\/(?:www\.)?instagram\.com\/[-a-zA-Z0-9@:%._+~#=]*)'
