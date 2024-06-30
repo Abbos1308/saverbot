@@ -9,6 +9,7 @@ from aiogram import types
 from aiogram.types import CallbackQuery , InputFile
 from .insta import instadownloader
 from .facebook import fbdownloader
+from .tiktok import ttdownloader
 from data.config import ADMINS
 from filters import IsUser, IsSuperAdmin, IsGuest
 from filters.admins import IsAdmin
@@ -114,12 +115,27 @@ async def download_facebook_video(message, text):
 async def download_tiktok_video(message, text):
     msg_del = await bot.send_chat_action(message.chat.id, types.ChatActions.TYPING)
 
-    res = snaptik(text)
-    video = res[0].download(f"{message.message_id}.mp4")
-    input_file = types.InputFile(f"{message.message_id}.mp4")
-    await bot.send_video(message.chat.id, video=input_file, caption="@full_downloaderr_bot orqali yuklab olindi!")
-    os.remove(f"{message.message_id}.mp4")
+    download_data = await ttdownloader(text)
 
+    if download_data:
+        try:
+            sub = random.choice(words)
+            sub2 = random.choice(words)
+            filename = f"video_tt_{sub}_{sub2}.mp4"
+            response = requests.get(download_data)
+
+            with open(filename, 'wb') as f:
+                f.write(response.content)
+            file = types.InputFile(filename)
+            #video = InputFile.from_url(download_data)
+            await bot.send_video(message.chat.id, file, caption="@full_downloaderr_bot orqali yuklab olindi!")
+        except Exception as err:
+            print(err)
+            
+            await message.answer("<b>Kechirasiz, kontentni yuklashda xatolik yuz berdi, qaytadan urining 😔</b>")
+    else:
+        await message.answer("<b>Bu havolada kontent topilmadi 😔</b>")
+    os.remove(f"{filename}")
 async def download_youtube_video(message, text):
     msg_del = await bot.send_chat_action(message.chat.id, types.ChatActions.TYPING)
 
