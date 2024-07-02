@@ -140,9 +140,8 @@ async def download_youtube_video(message, text):
 
     r = requests.get(f"https://youtube-dl.wave.video/info?url={text}&type=video")
     print(r.status_code)
-    vid_size = r.json().get('formats', [{}])[0].get('filesize')
+    vid_size = r.json()["formats"][0]["filesize_approx"]    
     vid_size = vid_size/(1024*1024)
-    print(vid_size)
     if vid_size > 35:
         await message.answer("Video hajmi juda katta")
     else:
