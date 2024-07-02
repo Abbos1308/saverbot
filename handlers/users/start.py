@@ -140,24 +140,30 @@ async def download_youtube_video(message, text):
 
     r = requests.get(f"https://youtube-dl.wave.video/info?url={text}&type=video")
     print(r.status_code)
-    vid = r.json().get('formats', [{}])[0].get('downloadUrl')
-    sub = random.choice(words)
-    sub2 = random.choice(words)
-    filename = f"video_{sub}_{sub2}.mp4"
-
-    response = requests.get(vid)
-
-    with open(filename, 'wb') as f:
-        f.write(response.content)
-    file = types.InputFile(filename)
-    try:
-        print("hello")
-        await bot.send_video(chat_id=message.chat.id, video=file, caption="@full_downloaderr_bot orqali yuklab olindi!")
-        
-    except Exception as err:
-        print(err)
-        await message.answer("<b>Kechirasiz, kontentni yuklashda xatolik yuz berdi, qaytadan urining 😔</b>")
-    os.remove(f"{filename}")
+    vid_size = r.json().get('formats', [{}])[0].get('filesize')
+    vid_size = vid_size/(1024*1024)
+    print(vid_size)
+    if vid_size > 35:
+        await message.answer("Video hajmi juda katta")
+    else:
+        vid = r.json().get('formats', [{}])[0].get('downloadUrl')
+        sub = random.choice(words)
+        sub2 = random.choice(words)
+        filename = f"video_{sub}_{sub2}.mp4"
+    
+        response = requests.get(vid)
+    
+        with open(filename, 'wb') as f:
+            f.write(response.content)
+        file = types.InputFile(filename)
+        try:
+            print("hello")
+            await bot.send_video(chat_id=message.chat.id, video=file, caption="@full_downloaderr_bot orqali yuklab olindi!")
+            
+        except Exception as err:
+            print(err)
+            await message.answer("<b>Kechirasiz, kontentni yuklashda xatolik yuz berdi, qaytadan urining 😔</b>")
+        os.remove(f"{filename}")
 # Handle text messages
 @dp.message_handler(content_types=types.ContentTypes.TEXT)
 async def handle_text(message: types.Message):
