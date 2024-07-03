@@ -10,6 +10,7 @@ from aiogram.types import CallbackQuery , InputFile
 from .insta import instadownloader
 from .facebook import fbdownloader
 from .tiktok import ttdownloader
+from .pin import pindownloader
 from data.config import ADMINS
 from filters import IsUser, IsSuperAdmin, IsGuest
 from filters.admins import IsAdmin
@@ -163,6 +164,19 @@ async def download_youtube_video(message, text):
             print(err)
             await message.answer("<b>Kechirasiz, kontentni yuklashda xatolik yuz berdi, qaytadan urining 😔</b>")
         os.remove(f"{filename}")
+
+async def download_pin_video(message):
+    msg_del = await bot.send_chat_action(message.chat.id, types.ChatActions.TYPING)
+    download_data = await pindownloader(message.text)
+    if download_data:
+        if download_data['type']=="video":
+            await message.answer_video(download_data['url'])
+        else:
+            await message.answer_photo(download_data['url'])
+    else:
+        await message.answer("Noto'g'ri havola")
+
+
 # Handle text messages
 @dp.message_handler(content_types=types.ContentTypes.TEXT)
 async def handle_text(message: types.Message):
@@ -178,6 +192,8 @@ async def handle_text(message: types.Message):
         await download_youtube_video(message, text)
     elif bool(matches_fb):
         await download_facebook_video(message,text)
+    elif "pin" in text and "http" in text:
+        await download_pin_video(message)
     else:
         await recieve_text(message)
 
