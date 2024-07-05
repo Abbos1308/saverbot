@@ -15,5 +15,3 @@ async def download_file(url, filename):
     except Exception as e:
         print(f"An error occurred: {e}")
 
-# Usage
-asyncio.run(download_file("https://tikcdn.io/ssstik/7357903815397428481", "22.mp4"))
