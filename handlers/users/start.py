@@ -11,6 +11,7 @@ from .insta import instadownloader
 from .facebook import fbdownloader
 from .tiktok import ttdownloader
 from .pin import pindownloader
+from .download import download_file
 from data.config import ADMINS
 from filters import IsUser, IsSuperAdmin, IsGuest
 from filters.admins import IsAdmin
@@ -122,10 +123,7 @@ async def download_tiktok_video(message, text):
             sub = random.choice(words)
             sub2 = random.choice(words)
             filename = f"video_tt_{sub}_{sub2}.mp4"
-            response = requests.get(download_data)
-
-            with open(filename, 'wb') as f:
-                f.write(response.content)
+            await download_file(download_data,filename)
             file = types.InputFile(filename)
             #video = InputFile.from_url(download_data)
             await bot.send_video(message.chat.id, file, caption="@full_downloaderr_bot orqali yuklab olindi!")
@@ -151,10 +149,7 @@ async def download_youtube_video(message, text):
         sub2 = random.choice(words)
         filename = f"video_{sub}_{sub2}.mp4"
     
-        response = requests.get(vid)
-    
-        with open(filename, 'wb') as f:
-            f.write(response.content)
+        await download_file(vid,filename)
         file = types.InputFile(filename)
         try:
             print("hello")
