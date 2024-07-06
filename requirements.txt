@@ -6,3 +6,4 @@ shazamio
 spotipy
 psycopg2-binary
 pytube
+simple_header
