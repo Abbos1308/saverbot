@@ -2,9 +2,10 @@ import aiohttp
 import asyncio
 
 
-async def download_file(url, filename,headers):
+async def download_file(url, filename,headers=None):
     try:
         async with aiohttp.ClientSession() as session:
+            
             async with session.get(url,headers=headers) as response:
                 if response.status == 200:
                     data = await response.read()
