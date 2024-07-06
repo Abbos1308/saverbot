@@ -254,12 +254,12 @@ async def send_advertisement_to_user(message: types.Message,state: FSMContext):
                 await bot.copy_message(chat_id=user_id, from_chat_id=message.chat.id,
                                     message_id=message.message_id, caption=message.caption,
                                     reply_markup=message.reply_markup, parse_mode=types.ParseMode.MARKDOWN)
-                db.set_active(user_id, 1)
+                #db.set_active(user_id, 1)
                 received_messages_count += 1  # Збільшення лічильника користувачів, які отримали повідомлення
 
                 time.sleep(0.5)
             except exceptions.BotBlocked:
-                db.set_active(user_id, 0)
+                #db.set_active(user_id, 0)
                 print(f"{user_id} foydalanuvchisi botni blokladi.")
 
             except Exception as e:
