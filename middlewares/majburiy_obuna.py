@@ -25,7 +25,7 @@ class Asosiy(BaseMiddleware):
             user_id = xabar.callback_query.from_user.id
         else:
             return
-        matn = "<b>⭕️ Botimizdan ma'lumot olish uchun kanalimizga obuna bo'ling.  Kanalimizga obuna bo'ling \n\" ✅ Tekshirish tugmasini bosing\"!</b>"
+        matn = "<b>⭕️ Botimizdan ma'lumot olish uchun kanalimizga obuna bo'ling.  Kanalimizga obuna bo'lgach  /start buyrug'ini yuboring!</b>"
         royxat = []
         dastlabki = True
 
@@ -37,7 +37,7 @@ class Asosiy(BaseMiddleware):
                 link = await kanals.export_invite_link()
                 button = [InlineKeyboardButton(text=f"{kanals.title}",url=f"{link}")]
                 royxat.append(button)
-        royxat.append([InlineKeyboardButton(text="✅ Tasdiqlash",callback_data="start")])
+        #royxat.append([InlineKeyboardButton(text="✅ Tasdiqlash",callback_data="start")])
         if not dastlabki:
             await bot.send_message(chat_id=user_id,text=matn,disable_web_page_preview=True,
                                        reply_markup=InlineKeyboardMarkup(inline_keyboard=royxat))
