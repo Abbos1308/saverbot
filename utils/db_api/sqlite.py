@@ -10,7 +10,7 @@ _____________________________________________________
 """)
     
 class Database:
-    def __init__(self, dbname="saverbot_db", user="saverbot_db_user", password="QgLON8WtRCH5WZIcrLgZkme0EFZCumtv", host="dpg-cpj7926ct0pc7384ua1g-a.oregon-postgres.render.com", port="5432"):
+    def __init__(self, dbname="saverbot_db", user="saverbot_db_user", password="QgLON8WtRCH5WZIcrLgZkme0EFZCumtv", host="dpg-cpj7926ct0pc7384ua1g-a.oregon-postgres.render.com", port="11992"):
         self.connection_params = {
             "dbname": dbname,
             "user": user,
