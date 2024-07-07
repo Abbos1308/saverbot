@@ -128,7 +128,7 @@ class Database:
         sql = """
         CREATE TABLE IF NOT EXISTS Admins (
             id SERIAL PRIMARY KEY,
-            user_id INTEGER NOT NULL UNIQUE,
+            user_id BIGINT NOT NULL UNIQUE,
             full_name VARCHAR(255) NOT NULL
             );
         """
