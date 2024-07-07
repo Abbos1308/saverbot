@@ -25,6 +25,11 @@ class Asosiy(BaseMiddleware):
             user_id = xabar.callback_query.from_user.id
         else:
             return
+
+        # Check if the chat is private (not a group or supergroup)
+        chat_type = xabar.message.chat.type
+        if chat_type != types.ChatType.PRIVATE:
+            return
         matn = "<b>⭕️ Botimizdan ma'lumot olish uchun kanalimizga obuna bo'ling.  Kanalimizga obuna bo'lgach  /start buyrug'ini yuboring!</b>"
         royxat = []
         dastlabki = True
