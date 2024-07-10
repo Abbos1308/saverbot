@@ -116,7 +116,7 @@ async def download_facebook_video(message, text):
 
 async def download_tiktok_video(message, text):
     msg_del = await bot.send_chat_action(message.chat.id, types.ChatActions.TYPING)
-    headers = {'Host': 'tikcdn.io', 'Connection': 'keep-alive', 'Cache-Control': 'max-age=0', 'Sec-Ch-Ua': '"Not A(Brand";v="99", "Microsoft Edge";v="109", "Chromium";v="109"', 'Sec-Ch-Ua-Mobile': '?0', 'Sec-Ch-Ua-Platform': 'Windows', 'Upgrade-Insecure-Requests': '1', 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36 Edg/109.0.1518.78', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7', 'Sec-Fetch-Site': 'none', 'Sec-Fetch-Mode': 'navigate', 'Sec-Fetch-User': '?1', 'Sec-Fetch-Dest': 'document', 'Referer': 'https://www.instagram.com/', 'Accept-Encoding': 'gzip, deflate', 'Accept-Language': 'en-US,en;q=0.5'}
+    #headers = {'Host': 'tikcdn.io', 'Connection': 'keep-alive', 'Cache-Control': 'max-age=0', 'Sec-Ch-Ua': '"Not A(Brand";v="99", "Microsoft Edge";v="109", "Chromium";v="109"', 'Sec-Ch-Ua-Mobile': '?0', 'Sec-Ch-Ua-Platform': 'Windows', 'Upgrade-Insecure-Requests': '1', 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36 Edg/109.0.1518.78', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7', 'Sec-Fetch-Site': 'none', 'Sec-Fetch-Mode': 'navigate', 'Sec-Fetch-User': '?1', 'Sec-Fetch-Dest': 'document', 'Referer': 'https://www.instagram.com/', 'Accept-Encoding': 'gzip, deflate', 'Accept-Language': 'en-US,en;q=0.5'}
     download_data = await ttdownloader(text)
     #headers = get(text,mobile=True)
     if download_data:
@@ -124,7 +124,7 @@ async def download_tiktok_video(message, text):
             sub = random.choice(words)
             sub2 = random.choice(words)
             filename = f"video_tt_{sub}_{sub2}.mp4"
-            await download_file(download_data,filename,headers)
+            await download_file(download_data,filename)
             file = types.InputFile(filename)
             #video = InputFile.from_url(download_data)
             await bot.send_video(message.chat.id, file, caption="@full_downloaderr_bot orqali yuklab olindi!")
