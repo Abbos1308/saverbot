@@ -149,8 +149,11 @@ async def download_youtube_video(message, text):
         sub = random.choice(words)
         sub2 = random.choice(words)
         filename = f"video_{sub}_{sub2}.mp4"
-    
-        await download_file(vid,filename)
+        response = requests.get(vid)
+
+        with open(filename, 'wb') as f:
+            f.write(response.content)
+        #await download_file(vid,filename)
         file = types.InputFile(filename)
         try:
             print("hello")
